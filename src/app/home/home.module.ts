@@ -6,13 +6,15 @@ import { HomeComponent } from './home.component';
 import { InfoComponent } from './info/info.component';
 import { VotingComponent } from './voting/voting.component';
 import { MaterialModule } from '../material/material.module';
+import { ToolbarHomeComponent } from './toolbar-home/toolbar-home.component';
 
 
 @NgModule({
   declarations: [
     HomeComponent,
     InfoComponent,
-    VotingComponent
+    VotingComponent,
+    ToolbarHomeComponent,
   ],
   imports: [
     CommonModule,

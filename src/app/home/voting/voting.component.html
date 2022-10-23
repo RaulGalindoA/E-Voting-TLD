@@ -1,1 +1,39 @@
-<p>voting works!</p>
+<div
+  class="bg-gray h-full flex flex-col items-center md:justify-start justify-center p-4"
+>
+  <div class="fg-pink font-bold text-2xl mb-4">Seleccione a su candidato</div>
+  <div class="bg-white">
+    <mat-radio-group formControlName="control">
+      <div class="flex flex-wrap md:px-32 px-4 p-4">
+        <div class="md:w-1/2 w-full" *ngFor="let i of auxArray">
+          <mat-label class="w-full">
+            <mat-radio-button [value]="i">
+              <div class="flex flex-row w-full p-4">
+                <img
+                  class="md:w-1/3 w-1/3 object-contain"
+                  src="{{ '../../../assets/img/' + i + '.png' }}"
+                />
+                <div
+                  class="ml-4 md:w-2/3 w-2/3 whitespace-pre-line text-justify"
+                >
+                  <div class="font-bold text-lg">Aquí va el partido</div>
+                  <div>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Tempore blanditiis ipsum in, explicabo eum quisquam!
+                    Laboriosam sint ullam vitae perferendis ipsam pariatur, sunt
+                    eligendi ipsa necessitatibus aliquid minima dignissimos eum.
+                  </div>
+                </div>
+              </div>
+            </mat-radio-button>
+          </mat-label>
+        </div>
+        <!-- <mat-label>
+        <mat-radio-button [value]="2">
+          <img width="100" src="../../../assets/img/12.png" />
+        </mat-radio-button>
+      </mat-label> -->
+      </div>
+    </mat-radio-group>
+  </div>
+</div>

@@ -14,13 +14,13 @@ import { FacialRecognitionComponent } from './facial-recognition/facial-recognit
     AppComponent,
     LoginComponent,
     ToolbarComponent,
-    FacialRecognitionComponent
+    FacialRecognitionComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,40 @@
+<mat-toolbar class="bg-pink justify-between w-full">
+  <!-- Web  -->
+  <div class="hidden md:flex w-full">
+    <div class="flex flex-row justify-between items-center w-full">
+      <img src="../../../assets/img/logoine.png" class="w-1/6" alt="" />
+      <div class="ml-auto text-white">Raúl Galindo Alfonsin</div>
+      <button mat-icon-button>
+        <mat-icon class="text-white">account_circle</mat-icon>
+      </button>
+      <button routerLink="/" mat-icon-button>
+        <mat-icon class="text-white">logout</mat-icon>
+      </button>
+    </div>
+  </div>
+  <!-- Móvil  -->
+  <div class="md:hidden w-full">
+    <div class="flex flex-row justify-between items-center">
+      <img src="../../../assets/img/logoine.png" class="w-1/6" alt="" />
+      <div class="text-white">Raúl Galindo Alfonsin</div>
+      <button
+        mat-icon-button
+        [matMenuTriggerFor]="menu"
+        aria-label="Example icon-button with a menu"
+      >
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>
+          <mat-icon>account_circle</mat-icon>
+          <span>Mi perfil</span>
+        </button>
+        <button routerLink="/" mat-menu-item>
+          <mat-icon>logout</mat-icon>
+          <span>Salir</span>
+        </button>
+      </mat-menu>
+    </div>
+  </div>
+</mat-toolbar>
+<div class="w-full"></div>
