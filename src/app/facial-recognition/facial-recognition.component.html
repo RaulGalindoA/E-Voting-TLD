@@ -1,0 +1,36 @@
+<div class="flex h-full flex-col">
+  <app-toolbar></app-toolbar>
+  <div class="h-full flex flex-col items-center bg-pink pt-6">
+    <div class="font-medium text-2xl px-4 text-center">
+      <span class="text-white"> Sistema de Registro para ejercer el </span>
+      <span class="fg-purple">Voto Electrónico</span>
+    </div>
+    <div class="text-2xl text-center md:mt-6 mt-12 md:mb-3 mb-6 text-white">
+      Hola: Raúl Galindo Alfonsin
+    </div>
+    <div class="fg-purple text-lg font-bold mb-4" routerLink="../login">
+      Cambiar de usuario
+    </div>
+    <div
+      class="bg-purple rounded-[50px] md:h-1/2 w-1/2 h-1/4 flex justify-center items-center"
+    >
+      <img src="../../assets/img/25.png" class="w-1/6" alt="" />
+    </div>
+    <div class="text-2xl text-center fg-purple font-bold mt-8 mb-4">
+      Reconocimiento facial
+    </div>
+    <div class="text-white text-lg px-4 text-justify md:mb-4 mb-0">
+      Para iniciar el proceso de reconocimiento facial, es necesario descubrir
+      tu rostro, para ello, retira lentes, cubrebocas, gorras, entre otros
+      elementos que puedan intervenir en el reconocimiento.
+    </div>
+    <div class="w-full flex flex-row mt-auto">
+      <div class="w-1/2" routerLink="../login">
+        <button class="w-full b-purple" mat-raised-button>Regresar</button>
+      </div>
+      <div class="w-1/2" routerLink="../home/info">
+        <button class="w-full" mat-raised-button color="accent">Iniciar</button>
+      </div>
+    </div>
+  </div>
+</div>

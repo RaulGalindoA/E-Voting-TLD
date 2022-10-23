@@ -1,0 +1,39 @@
+<div class="flex h-full flex-col">
+  <app-toolbar></app-toolbar>
+  <div class="flex md:flex-row flex-col flex-1">
+    <div
+      class="md:h-full flex-col h-2/5 md:w-1/2 w-full bg-pink border-0 flex md:justify-center md:items-center justify-end"
+    >
+      <div class="font-medium text-2xl px-4 text-center">
+        <span class="text-white"> Sistema de Registro para ejercer el </span>
+        <span class="fg-purple">Voto Electrónico</span>
+      </div>
+      <img class="w-full" src="../../assets/img/3.png" alt="" />
+    </div>
+    <div class="md:h-full h-3/5 md:w-1/2 w-full bg-pink border-0">
+      <div
+        class="h-full rounded-[50px] bg-purple md:px-16 px-6 flex flex-col items-center"
+      >
+        <div class="text-center text-white text-2xl font-bold mt-10 mb-12">
+          Iniciar sesión
+        </div>
+        <div class="fg-pink font-bold text-left w-full text-xl my-2">
+          Usuario:
+        </div>
+        <div class="text-justify text-white w-full my-2">
+          Escribe tu clave de elector tal como aparece en tu credencial:
+        </div>
+        <mat-form-field class="w-full mt-2" appearance="fill">
+          <mat-label>Fill form field</mat-label>
+          <mat-icon matSuffix>account_circle</mat-icon>
+          <input matInput placeholder="Placeholder" />
+        </mat-form-field>
+        <div class="w-full mb-4">
+          <button routerLink="../facial" class="w-full" mat-raised-button color="accent">
+            Siguiente
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
