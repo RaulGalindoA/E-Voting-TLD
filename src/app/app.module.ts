@@ -8,6 +8,15 @@ import { ToolbarComponent } from './common/toolbar/toolbar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 import { FacialRecognitionComponent } from './facial-recognition/facial-recognition.component';
+import { DialogResponseComponent } from './dialogs/dialog-response/dialog-response.component';
+import { DialogConfirmComponent } from './dialogs/dialog-confirm/dialog-confirm.component';
+import { LottieModule } from 'ngx-lottie';
+import player from 'lottie-web';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+export function playerFactory() {
+  return player;
+}
 
 @NgModule({
   declarations: [
@@ -15,12 +24,17 @@ import { FacialRecognitionComponent } from './facial-recognition/facial-recognit
     LoginComponent,
     ToolbarComponent,
     FacialRecognitionComponent,
+    DialogResponseComponent,
+    DialogConfirmComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
+    LottieModule.forRoot({ player: playerFactory }),
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

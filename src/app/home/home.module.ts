@@ -7,6 +7,7 @@ import { InfoComponent } from './info/info.component';
 import { VotingComponent } from './voting/voting.component';
 import { MaterialModule } from '../material/material.module';
 import { ToolbarHomeComponent } from './toolbar-home/toolbar-home.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -19,7 +20,9 @@ import { ToolbarHomeComponent } from './toolbar-home/toolbar-home.component';
   imports: [
     CommonModule,
     HomeRoutingModule,
-    MaterialModule
+    MaterialModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class HomeModule { }

@@ -23,16 +23,28 @@
         <div class="text-justify text-white w-full my-2">
           Escribe tu clave de elector tal como aparece en tu credencial:
         </div>
-        <mat-form-field class="w-full mt-2" appearance="fill">
-          <mat-label>OCR</mat-label>
-          <mat-icon matSuffix>account_circle</mat-icon>
-          <input placeholder="Ejemplo: 0747116375842" matInput />
-        </mat-form-field>
-        <div class="w-full mb-4">
-          <button routerLink="../facial" class="w-full" mat-raised-button color="accent">
-            Siguiente
-          </button>
-        </div>
+        <form (ngSubmit)="login()" [formGroup]="form" class="w-full">
+          <mat-form-field class="w-full mt-2 mb-4" appearance="fill">
+            <mat-label>OCR</mat-label>
+            <mat-icon matSuffix>account_circle</mat-icon>
+            <input
+              formControlName="ocr"
+              placeholder="Ejemplo: 0747116375842"
+              matInput
+            />
+            <mat-error *ngIf="isValidOCR()">{{ getErrorMessage() }}</mat-error>
+          </mat-form-field>
+          <div class="w-full mb-4">
+            <button
+              type="submit"
+              class="w-full"
+              mat-raised-button
+              color="accent"
+            >
+              Ingresar
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
