@@ -8,6 +8,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatDialogModule} from '@angular/material/dialog';
+import { WebcamModule } from 'ngx-webcam';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatToolbarModule,
     MatMenuModule,
     MatRadioModule,
-    MatDialogModule
+    MatDialogModule,
+    WebcamModule
   ]
 })
 export class MaterialModule { }

@@ -4,7 +4,7 @@
 @tailwind utilities;
 
 // html, body { height: 100%; }
-html, body { height: 100%; }
+html, body { height: 100vh; }
 
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
@@ -31,6 +31,22 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .bg-gray {
     background-color: #F0F0F0;
+}
+
+.h-500 {
+    height: 500px;
+}
+
+.w-500 {
+    width: 500px;
+}
+
+.h-350 {
+    height: 350px;
+}
+
+.w-350 {
+    width: 350px;
 }
 
 // .max-h-50 {

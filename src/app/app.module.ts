@@ -13,6 +13,8 @@ import { DialogConfirmComponent } from './dialogs/dialog-confirm/dialog-confirm.
 import { LottieModule } from 'ngx-lottie';
 import player from 'lottie-web';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DialogOCRComponent } from './dialogs/dialog-ocr/dialog-ocr.component';
+import { DialogConfirmPhotoComponent } from './dialogs/dialog-confirm-photo/dialog-confirm-photo.component';
 
 export function playerFactory() {
   return player;
@@ -26,6 +28,8 @@ export function playerFactory() {
     FacialRecognitionComponent,
     DialogResponseComponent,
     DialogConfirmComponent,
+    DialogOCRComponent,
+    DialogConfirmPhotoComponent,
   ],
   imports: [
     BrowserModule,

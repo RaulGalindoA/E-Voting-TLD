@@ -3,6 +3,10 @@
 }
 
 .mat-radio-checked {
-    background-color: #57004F;
-    color: white;
+  background-color: #57004f;
+  color: white;
+}
+
+::ng-deep .mat-radio-label-content {
+  width: 100% !important;
 }

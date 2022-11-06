@@ -1,8 +1,8 @@
-<div class="flex h-full flex-col">
+<div class="flex flex-col h-full">
   <app-toolbar></app-toolbar>
   <div class="flex md:flex-row flex-col flex-1">
     <div
-      class="md:h-full flex-col h-2/5 md:w-1/2 w-full bg-pink border-0 flex md:justify-center md:items-center justify-end"
+      class="md:h-full flex-col md:w-1/2 w-full bg-pink border-0 flex md:justify-center md:items-center justify-end"
     >
       <div class="font-medium text-2xl px-4 text-center">
         <span class="text-white"> Sistema de Registro para ejercer el </span>
@@ -10,7 +10,7 @@
       </div>
       <img class="w-full" src="../../assets/img/3.png" alt="" />
     </div>
-    <div class="md:h-full h-3/5 md:w-1/2 w-full bg-pink border-0">
+    <div class="md:h-full md:w-1/2 w-full bg-pink border-0">
       <div
         class="h-full rounded-[50px] bg-purple md:px-16 px-6 flex flex-col items-center"
       >
@@ -34,15 +34,20 @@
             />
             <mat-error *ngIf="isValidOCR()">{{ getErrorMessage() }}</mat-error>
           </mat-form-field>
-          <div class="w-full mb-4">
-            <button
-              type="submit"
-              class="w-full"
-              mat-raised-button
-              color="accent"
-            >
-              Ingresar
-            </button>
+          <div class="w-full flex justify-between mb-4">
+            <div>
+              <button class="fg-pink" type="button" mat-button (click)="openOCRModal()">Conoce tu OCR</button>
+            </div>
+            <div>
+              <button
+                type="submit"
+                class="w-full"
+                mat-raised-button
+                color="accent"
+              >
+                Ingresar
+              </button>
+            </div>
           </div>
         </form>
       </div>
