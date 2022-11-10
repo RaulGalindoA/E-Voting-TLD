@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { DialogResponseComponent } from '../dialogs/dialog-response/dialog-response.component';
 import { DialogData } from '../interfaces/dialog-data';
 import { DialogOCRComponent } from '../dialogs/dialog-ocr/dialog-ocr.component';
+import { TLDService } from '../services/tld.service';
+import { LocalService } from '../services/local.service';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +14,12 @@ import { DialogOCRComponent } from '../dialogs/dialog-ocr/dialog-ocr.component';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  constructor(public dialog: MatDialog, private router: Router) {}
+  constructor(
+    public dialog: MatDialog,
+    private router: Router,
+    private tldService: TLDService,
+    private localService: LocalService
+  ) {}
 
   form = new FormGroup({
     ocr: new FormControl('', [
@@ -23,7 +30,6 @@ export class LoginComponent implements OnInit {
   });
 
   isValidOCR() {
-    console.log(this.form.get('ocr')?.errors);
     return this.form.get('ocr')?.errors;
   }
 
@@ -66,7 +72,24 @@ export class LoginComponent implements OnInit {
         'Favor de llenar el campo correctamente.'
       );
     } else {
-      this.router.navigate(['facial']);
+      let ocr = this.form.get('ocr')?.value;
+
+      this.tldService.checkOCR(ocr!).subscribe({
+        next: (resp) => {
+          console.log(resp);
+          if (resp.status == 400) {
+            this.openDialog(false, 'Error', resp.data);
+          } else {
+            this.localService.setJsonValue('ocrToken', resp.data);
+            this.router.navigate(['/facial'])
+          }
+        },
+        error: (error) => {
+          console.log(error);
+        },
+      });
+
+      // this.router.navigate(['facial']);
     }
   }
 

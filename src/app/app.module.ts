@@ -15,6 +15,7 @@ import player from 'lottie-web';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DialogOCRComponent } from './dialogs/dialog-ocr/dialog-ocr.component';
 import { DialogConfirmPhotoComponent } from './dialogs/dialog-confirm-photo/dialog-confirm-photo.component';
+import { HttpClientModule } from '@angular/common/http';
 
 export function playerFactory() {
   return player;
@@ -30,6 +31,7 @@ export function playerFactory() {
     DialogConfirmComponent,
     DialogOCRComponent,
     DialogConfirmPhotoComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -38,7 +40,8 @@ export function playerFactory() {
     MaterialModule,
     LottieModule.forRoot({ player: playerFactory }),
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

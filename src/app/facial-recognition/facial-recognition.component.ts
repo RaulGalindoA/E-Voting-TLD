@@ -5,6 +5,12 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogConfirmComponent } from '../dialogs/dialog-confirm/dialog-confirm.component';
 import { DialogConfirmPhotoComponent } from '../dialogs/dialog-confirm-photo/dialog-confirm-photo.component';
 import { Router } from '@angular/router';
+import { LocalService } from '../services/local.service';
+import { TLDService } from '../services/tld.service';
+import { DialogData } from '../interfaces/dialog-data';
+import { DialogResponseComponent } from '../dialogs/dialog-response/dialog-response.component';
+import { RecognizeResponse } from '../interfaces/recognize-response';
+import { APIResponse } from '../interfaces/apiresponse';
 
 @Component({
   selector: 'app-facial-recognition',
@@ -14,7 +20,12 @@ import { Router } from '@angular/router';
 export class FacialRecognitionComponent implements OnInit {
   displayCamara: boolean = false;
 
-  constructor(private dialog: MatDialog, private router: Router) {}
+  constructor(
+    private dialog: MatDialog,
+    private router: Router,
+    private localService: LocalService,
+    private tldService: TLDService
+  ) {}
 
   ngOnInit(): void {}
 
@@ -53,14 +64,31 @@ export class FacialRecognitionComponent implements OnInit {
     if (this.displayCamara == true) {
       this.getSnapshot();
       var base64result = this.sysImage.split(',')[1];
-      console.log(base64result);
+      // console.log(base64result);
       const dialogRef = this.dialog.open(DialogConfirmPhotoComponent, {
         data: this.sysImage,
       });
       dialogRef.afterClosed().subscribe({
         next: (resp) => {
           if (resp) {
-            this.router.navigate(['/home/info']);
+            let token = this.localService.getJsonValue('ocrToken')
+            
+            this.tldService.checkFace(token, base64result).subscribe(
+              {
+                next: (resp) => {
+                  if ( resp.status == 200 ){
+                    this.localService.setJsonValue('facialToken', resp)
+                    this.router.navigate(['/home/info'])
+                  } else {
+                    let respApi = resp as APIResponse
+                    this.openDialog(false, 'Error', respApi.data)
+                  }
+                }, 
+                error: (error) => {
+                  this.openDialog(false, 'Error', 'No pudimos validar su identidad, por favor, inténtelo nuevamente.')
+                }
+              }
+            )
           }
         },
         error: (error) => {},
@@ -68,5 +96,21 @@ export class FacialRecognitionComponent implements OnInit {
     } else {
       this.displayCamara = true;
     }
+  }
+
+  openDialog(success: boolean, header: string, message: string): void {
+    let data: DialogData = {
+      success,
+      header,
+      message,
+    };
+    const dialogRef = this.dialog.open(DialogResponseComponent, {
+      width: '400px',
+      data,
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The dialog was closed');
+    });
   }
 }
