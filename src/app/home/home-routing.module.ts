@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home.component';
 import { InfoComponent } from './info/info.component';
 import { VotingComponent } from './voting/voting.component';
+import { SelectVotingComponent } from './select-voting/select-voting.component';
 
 const routes: Routes = [
   {
@@ -11,22 +12,26 @@ const routes: Routes = [
     children: [
       {
         path: 'info',
-        component: InfoComponent
+        component: InfoComponent,
+      },
+      {
+        path: 'select-voting',
+        component: SelectVotingComponent,
       },
       {
         path: 'voting',
-        component: VotingComponent
+        component: VotingComponent,
       },
       {
         path: '**',
-        redirectTo: 'info'
-      }
-    ]
-  }
+        redirectTo: 'info',
+      },
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class HomeRoutingModule { }
+export class HomeRoutingModule {}

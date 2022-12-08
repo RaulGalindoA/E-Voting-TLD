@@ -16,6 +16,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DialogOCRComponent } from './dialogs/dialog-ocr/dialog-ocr.component';
 import { DialogConfirmPhotoComponent } from './dialogs/dialog-confirm-photo/dialog-confirm-photo.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ResultsComponent } from './results/results.component';
+import { NgChartsModule } from 'ng2-charts';
+import { DialogLoadingComponent } from './dialogs/dialog-loading/dialog-loading.component';
 
 export function playerFactory() {
   return player;
@@ -31,6 +34,8 @@ export function playerFactory() {
     DialogConfirmComponent,
     DialogOCRComponent,
     DialogConfirmPhotoComponent,
+    ResultsComponent,
+    DialogLoadingComponent,
 
   ],
   imports: [
@@ -41,7 +46,8 @@ export function playerFactory() {
     LottieModule.forRoot({ player: playerFactory }),
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgChartsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

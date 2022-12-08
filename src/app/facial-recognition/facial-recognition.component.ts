@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { finalize, Observable, Subject } from 'rxjs';
 import { WebcamImage, WebcamInitError, WebcamUtil } from 'ngx-webcam';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogConfirmComponent } from '../dialogs/dialog-confirm/dialog-confirm.component';
@@ -11,6 +11,7 @@ import { DialogData } from '../interfaces/dialog-data';
 import { DialogResponseComponent } from '../dialogs/dialog-response/dialog-response.component';
 import { RecognizeResponse } from '../interfaces/recognize-response';
 import { APIResponse } from '../interfaces/apiresponse';
+import { DialogLoadingComponent } from '../dialogs/dialog-loading/dialog-loading.component';
 
 @Component({
   selector: 'app-facial-recognition',
@@ -51,7 +52,7 @@ export class FacialRecognitionComponent implements OnInit {
   public captureImg(webcamImage: WebcamImage): void {
     this.webcamImage = webcamImage;
     this.sysImage = webcamImage!.imageAsDataUrl;
-    console.info('got webcam image', this.sysImage);
+    // console.info('got webcam image', this.sysImage);
   }
   public get invokeObservable(): Observable<any> {
     return this.trigger.asObservable();
@@ -68,31 +69,51 @@ export class FacialRecognitionComponent implements OnInit {
       const dialogRef = this.dialog.open(DialogConfirmPhotoComponent, {
         data: this.sysImage,
       });
-      dialogRef.afterClosed().subscribe({
-        next: (resp) => {
-          if (resp) {
-            let token = this.localService.getJsonValue('ocrToken')
-            
-            this.tldService.checkFace(token, base64result).subscribe(
-              {
-                next: (resp) => {
-                  if ( resp.status == 200 ){
-                    this.localService.setJsonValue('facialToken', resp)
-                    this.router.navigate(['/home/info'])
-                  } else {
-                    let respApi = resp as APIResponse
-                    this.openDialog(false, 'Error', respApi.data)
-                  }
-                }, 
-                error: (error) => {
-                  this.openDialog(false, 'Error', 'No pudimos validar su identidad, por favor, inténtelo nuevamente.')
-                }
-              }
-            )
-          }
-        },
-        error: (error) => {},
-      });
+      dialogRef
+        .afterClosed()
+        .pipe(
+          finalize(() => {
+            this;
+            console.log('acabó');
+          })
+        )
+        .subscribe({
+          next: (resp) => {
+            if (resp) {
+              let token = this.localService.getJsonValue('ocrToken');
+              const loading = this.dialog.open(DialogLoadingComponent, {
+                disableClose: true,
+              });
+              this.tldService
+                .checkFace(token, base64result)
+                .pipe(
+                  finalize(() => {
+                    loading.close();
+                  })
+                )
+                .subscribe({
+                  next: (resp) => {
+                    if (resp.status == 200) {
+                      this.localService.setJsonValue('facialToken', resp);
+                      this.router.navigate(['/home/info']);
+                      this.localService.setJsonValue('name', resp.name);
+                    } else {
+                      let respApi = resp as APIResponse;
+                      this.openDialog(false, 'Error', respApi.data);
+                    }
+                  },
+                  error: (error) => {
+                    this.openDialog(
+                      false,
+                      'Error',
+                      'No pudimos validar su identidad, por favor, inténtelo nuevamente.'
+                    );
+                  },
+                });
+            }
+          },
+          error: (error) => {},
+        });
     } else {
       this.displayCamara = true;
     }
@@ -112,5 +133,10 @@ export class FacialRecognitionComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       console.log('The dialog was closed');
     });
+  }
+
+  return() {
+    this.localService.clearToken();
+    this.router.navigate(['/']);
   }
 }

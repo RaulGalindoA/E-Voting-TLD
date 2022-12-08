@@ -1,0 +1,38 @@
+<div class="w-full h-screen flex flex-col">
+  <app-toolbar></app-toolbar>
+  <div class="bg-purple md:p-12 p-6 grow">
+    <div class="bg-white md:p-12 p-6 h-full">
+      <div>
+        <button (click)="goBack()" mat-icon-button color="accent" aria-label="Example icon button with a menu icon">
+          <mat-icon>arrow_back_ios</mat-icon>
+        </button>
+      </div>
+      <div class="text-2xl text-white text-center fg-purple font-bold mb-4">
+        Resultados:
+      </div>
+      <!-- <div
+        class="overflow-x-scroll h-full w-full flex items-center justify-start"
+      > -->
+      <div
+        class="flex w-full items-center justify-start overflow-x-scroll"
+      >
+        <!-- <div class="h-3/4 w-full chart"> -->
+        <!-- <div class="h-3/4 w-chart chart"> -->
+
+        <div class="chartWrapper">
+          <div class="chartAreaWrapper">
+            <canvas
+              baseChart
+              [data]="barChartData"
+              [options]="barChartOptions"
+              [plugins]="barChartPlugins"
+              [type]="'bar'"
+              height="400"
+            >
+            </canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,16 +1,16 @@
 <div class="flex h-screen flex-col bg-pink overflow-y-scroll">
   <app-toolbar></app-toolbar>
   <div class="h-full flex flex-col items-center p-3 bg-pink">
-    <div class="font-medium text-2xl px-4 text-center">
+    <div class="font-medium text-2xl px-4 text-center mb-4">
       <span class="text-white"> Sistema de Registro para ejercer el </span>
       <span class="fg-purple">Voto Electrónico</span>
     </div>
     <!-- <div class="text-2xl text-center md:mt-3 mt-6 md:mb-1 text-white">
       Hola: Raúl Galindo Alfonsin
     </div> -->
-    <div class="fg-purple text-lg font-bold mb-2" routerLink="../login">
+    <!-- <div class="fg-purple text-lg font-bold mb-2" routerLink="../login">
       Cambiar de usuario
-    </div>
+    </div> -->
     <div
       *ngIf="!displayCamara"
       class="bg-purple rounded-[50px] flex justify-center items-center md:h-500 h-350 md:w-500 w-350"
@@ -34,11 +34,11 @@
       tu rostro, para ello, retira lentes, cubrebocas, gorras, entre otros
       elementos que puedan intervenir en el reconocimiento.
     </div>
-    <div class="w-full flex flex-row mt-auto bg-pink mt-4">
-      <div class="w-1/2" routerLink="../login">
-        <button class="w-full b-purple" mat-raised-button>Regresar</button>
+    <div class="w-full flex md:flex-row flex-col justify-around mt-auto bg-pink mt-4">
+      <div class="w-full md:w-1/4 md:py-0 py-2">
+        <button class="w-full b-purple" mat-raised-button (click)="return()" >Regresar</button>
       </div>
-      <div class="w-1/2">
+      <div class="w-full md:w-1/4 md:py-0 py-2">
         <button
           (click)="getActionButton()"
           class="w-full"

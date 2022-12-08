@@ -7,6 +7,8 @@ import { DialogData } from '../interfaces/dialog-data';
 import { DialogOCRComponent } from '../dialogs/dialog-ocr/dialog-ocr.component';
 import { TLDService } from '../services/tld.service';
 import { LocalService } from '../services/local.service';
+import { DialogLoadingComponent } from '../dialogs/dialog-loading/dialog-loading.component';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -44,7 +46,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.openDialog()
+    this.localService.clearToken();
   }
 
   openDialog(success: boolean, header: string, message: string): void {
@@ -74,19 +76,28 @@ export class LoginComponent implements OnInit {
     } else {
       let ocr = this.form.get('ocr')?.value;
 
-      this.tldService.checkOCR(ocr!).subscribe({
+      const loading = this.dialog.open(DialogLoadingComponent, {
+        disableClose: true,
+      });
+
+      this.tldService.checkOCR(ocr!)
+      .pipe(
+        finalize(() => {
+          loading.close();
+        })
+      )
+      .subscribe({
         next: (resp) => {
-          console.log(resp);
           if (resp.status == 400) {
             this.openDialog(false, 'Error', resp.data);
           } else {
             this.localService.setJsonValue('ocrToken', resp.data);
-            this.router.navigate(['/facial'])
+            this.router.navigate(['/facial']);
           }
         },
         error: (error) => {
-          console.log(error);
-        },
+          this.openDialog(false, 'Error', error.stringify());
+        }
       });
 
       // this.router.navigate(['facial']);

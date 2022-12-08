@@ -1,3 +1,4 @@
 export interface Partido {
-    image: string;
+    nombre: string;
+    image?: string;
 }

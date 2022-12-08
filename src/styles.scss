@@ -49,6 +49,30 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     width: 350px;
 }
 
+.w-chart {
+    width: 1200px;
+}
+
+.h-chart {
+    height: 50vh;
+}
+
+.chartWrapper {
+    position: relative;
+  }
+  
+  .chartWrapper > canvas {
+    position: absolute;
+    left: 0;
+    top: 0;
+    pointer-events: none;
+  }
+  
+  .chartAreaWrapper {
+    width: 1200px;
+    // overflow-x: scroll;
+  }
+
 // .max-h-50 {
 //     max-height: 50%;
 // }

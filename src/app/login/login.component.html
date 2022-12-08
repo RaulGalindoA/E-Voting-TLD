@@ -1,6 +1,6 @@
 <div class="flex flex-col h-full">
   <app-toolbar></app-toolbar>
-  <div class="flex md:flex-row flex-col flex-1">
+  <div class="flex md:flex-row flex-col grow">
     <div
       class="md:h-full flex-col md:w-1/2 w-full bg-pink border-0 flex md:justify-center md:items-center justify-end"
     >
@@ -10,7 +10,7 @@
       </div>
       <img class="w-full" src="../../assets/img/3.png" alt="" />
     </div>
-    <div class="md:h-full md:w-1/2 w-full bg-pink border-0">
+    <div class="md:h-full md:w-1/2 w-full bg-pink border-0 grow">
       <div
         class="h-full rounded-[50px] bg-purple md:px-16 px-6 flex flex-col items-center"
       >
@@ -21,7 +21,7 @@
           Usuario:
         </div>
         <div class="text-justify text-white w-full my-2">
-          Escribe tu clave de elector tal como aparece en tu credencial:
+          Ingresa tu OCR tal como aparece en tu credencialde elector:
         </div>
         <form (ngSubmit)="login()" [formGroup]="form" class="w-full">
           <mat-form-field class="w-full mt-2 mb-4" appearance="fill">
@@ -36,7 +36,14 @@
           </mat-form-field>
           <div class="w-full flex justify-between mb-4">
             <div>
-              <button class="fg-pink" type="button" mat-button (click)="openOCRModal()">Conoce tu OCR</button>
+              <button
+                class="fg-pink"
+                type="button"
+                mat-button
+                (click)="openOCRModal()"
+              >
+                Conoce tu OCR
+              </button>
             </div>
             <div>
               <button
@@ -50,6 +57,11 @@
             </div>
           </div>
         </form>
+        <div class="pb-4">
+          <button mat-button routerLink="/results" type="button" class="w-full" color="accent">
+            Ir a los resultados
+          </button>
+        </div>
       </div>
     </div>
   </div>

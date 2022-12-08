@@ -9,4 +9,7 @@
         <ng-lottie *ngIf="data.success" [options]="optionsSuccess" (animationCreated)="animationCreated($event)"></ng-lottie>
         <ng-lottie *ngIf="!data.success" [options]="optionsError" (animationCreated)="animationCreated($event)"></ng-lottie>
     </div>
+    <div class="mt-8 flex flex-row justify-center">
+        <button mat-raised-button mat-dialog-close color="accent">Entendido</button>
+    </div>
 </div>
